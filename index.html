@@ -1,0 +1,120 @@
+ <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Unified AI Shorts & Financial Engine</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <style>
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+          body { font-family: 'Inter', sans-serif; }
+          .gradient-text {
+              background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+          }
+      </style>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen">
+      <!-- Navbar -->
+      <nav class="border-b border-gray-800 p-6">
+          <div class="max-w-7xl mx-auto flex justify-between items-center">
+              <h1 class="text-2xl font-bold gradient-text">Unified AI Studio</h1>
+              <div class="space-x-6 text-sm font-medium text-gray-400">
+                  <a href="#" class="hover:text-white transition">Dashboard</a>
+                  <a href="#" class="hover:text-white transition">Analytics</a>
+                  <a href="#" class="hover:text-white transition">API Docs</a>
+                  <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Get
+  Started</button>
+              </div>
+          </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <header class="max-w-7xl mx-auto px-6 py-20 text-center">
+          <h2 class="text-5xl md:text-7xl font-extrabold mb-6">
+              The Future of <span class="gradient-text">Automated Shorts</span>
+          </h2>
+          <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+              Harness the power of OpenShorts, FinceptTerminal, and claude-video in one seamless pipeline. Turn any
+  video or financial data into viral vertical content in seconds.
+          </p>
+          <div class="flex justify-center space-x-4">
+              <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 w-40">
+                  <p class="text-blue-400 font-bold">OpenShorts</p>
+                  <p class="text-xs text-gray-500">Video Engine</p>
+              </div>
+              <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 w-40">
+                  <p class="text-purple-400 font-bold">Fincept</p>
+                  <p class="text-xs text-gray-500">Market Intelligence</p>
+              </div>
+              <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 w-40">
+                  <p class="text-pink-400 font-bold">claude-video</p>
+                  <p class="text-xs text-gray-500">Agentic Vision</p>
+              </div>
+          </div>
+      </header>
+
+      <!-- Latest Output Section -->
+      <section class="max-w-5xl mx-auto px-6 py-12">
+          <div class="bg-gray-800/50 rounded-3xl p-8 border border-gray-700 shadow-2xl">
+              <h3 class="text-2xl font-bold mb-6 flex items-center">
+                  <span class="mr-2">🎬</span> Latest Generated Short
+              </h3>
+              <div class="grid md:grid-cols-2 gap-8">
+                  <div class="aspect-[9/16] bg-black rounded-2xl flex items-center justify-center border border-gray-600
+  relative overflow-hidden">
+                      <img src="https://img.youtube.com/vi/RE3_PGwDwhw/maxresdefault.jpg" class="absolute inset-0 w-full
+  h-full object-cover opacity-40 blur-sm" />
+                      <div class="z-10 text-center px-4">
+                          <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4
+  cursor-pointer hover:scale-110 transition">
+                              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3
+  2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
+                          </div>
+                          <p class="font-bold text-lg">The Ultimate Turning Point</p>
+                          <p class="text-sm text-gray-300">05:28 - 06:15</p>
+                      </div>
+                  </div>
+                  <div class="space-y-6">
+                      <div>
+                          <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Video
+  Insights</h4>
+                          <ul class="space-y-3">
+                              <li class="flex items-start">
+                                  <span class="text-green-400 mr-2">✓</span>
+                                  <p class="text-gray-300">Viral moment detected via Gemini-Vision</p>
+                              </li>
+                              <li class="flex items-start">
+                                  <span class="text-green-400 mr-2">✓</span>
+                                  <p class="text-gray-300">Financial sentiment analyzed: High-Impact Bullish</p>
+                              </li>
+                              <li class="flex items-start">
+                                  <span class="text-green-400 mr-2">✓</span>
+                                  <p class="text-gray-300">9:16 vertical crop with face-tracking applied</p>
+                              </li>
+                          </ul>
+                      </div>
+                      <div>
+                          <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Metadata</h4>
+                          <div class="bg-gray-900 rounded-lg p-4 font-mono text-xs text-blue-300">
+                              {<br>
+                              &nbsp;&nbsp;"source": "RE3_PGwDwhw",<br>
+                              &nbsp;&nbsp;"engine": "OpenShorts-V2",<br>
+                              &nbsp;&nbsp;"status": "Ready to Publish"<br>
+                              }
+                          </div>
+                      </div>
+                      <button class="w-full bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-200 transition">
+                          Download Short & Post to TikTok
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <footer class="text-center py-12 text-gray-500 text-sm">
+          &copy; 2026 Unified AI Studio. Powered by diddyballs repos.
+      </footer>
+  </body>
+  </html>
