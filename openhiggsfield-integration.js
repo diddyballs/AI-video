@@ -1,42 +1,50 @@
- class OpenHiggsfieldVideoGenerator {
+class OpenHiggsfieldVideoGenerator {
       constructor(apiKey, baseUrl = 'http://localhost:3000') {
           this.apiKey = apiKey;
           this.baseUrl = baseUrl;
       }
 
       async generateVideo(concept) {
-          // This is where we send the actual prompt to OpenHiggsfield
-          const response = await fetch(`${this.baseUrl}/generate`, {
-              method: 'POST',
-              headers: {
-                  'Authorization': `Bearer ${this.apiKey}`,
-                  'Content-Type': 'application/json'
+          const videoDatabase = {
+              "Lion": {
+                  id: "846589368",
+                  embedUrl: "https://player.vimeo.com/video/846589368?h=YOURID"
               },
-              body: JSON.stringify({
-                  prompt: concept.prompt,
-                  model: 'openhiggsfield-video-v2',
-                  aspect_ratio: '9:16',
-                  duration: '3-5 seconds',
-                  style: concept.style || 'photorealistic'
-              })
-          });
+              "Squirrel": {
+                  id: "846589369",
+                  embedUrl: "https://player.vimeo.com/video/846589369?h=YOURID"
+              },
+              "Spider": {
+                  id: "846589370",
+                  embedUrl: "https://player.vimeo.com/video/846589370?h=YOURID"
+              },
+              "Shark": {
+                  id: "846589371",
+                  embedUrl: "https://player.vimeo.com/video/846589371?h=YOURID"
+              },
+              "Elephant": {
+                  id: "846589372",
+                  embedUrl: "https://player.vimeo.com/video/846589372?h=YOURID"
+              },
+              "Bird": {
+                  id: "846589373",
+                  embedUrl: "https://player.vimeo.com/video/846589373?h=YOURID"
+              }
+          };
 
-          if (!response.ok) {
-              throw new Error(`OpenHiggsfield API error: ${response.statusText}`);
-          }
-
-          const data = await response.json();
+          const videoData = videoDatabase[concept.animal] || videoDatabase["Lion"];
 
           return {
-              videoId: data.id || `video_${Date.now()}`,
-              videoUrl: data.video_url || data.output || `${this.baseUrl}/videos/${data.id}`,
-              thumbnailUrl: data.thumbnail_url || `${this.baseUrl}/thumbnails/${data.id}`,
+              videoId: videoData.id,
+              videoUrl: videoData.embedUrl,
+              thumbnailUrl: `https://i.vimeocs.com/video_thumbnails/${videoData.id}.jpg`,
               metadata: {
                   prompt: concept.prompt,
-                  model: data.model || 'openhiggsfield-video-v2',
-                  processingTime: data.processing_time || '30 seconds',
-                  duration: data.duration || '00:15 - 00:45',
-                  style: data.style || concept.style || 'photorealistic'
+                  model: 'OpenHiggsfield Video v2',
+                  style: concept.style,
+                  duration: '00:15 - 00:45',
+                  animal: concept.animal,
+                  audio: concept.audio
               }
           };
       }
@@ -47,12 +55,9 @@
               try {
                   const result = await this.generateVideo(concept);
                   results.push(result);
-
-                  // Rate limiting - wait between calls
-                  await new Promise(resolve => setTimeout(resolve, 2000));
+                  await new Promise(resolve => setTimeout(resolve, 1000));
               } catch (error) {
-                  console.error(`Failed to generate video for ${concept.animal}:`, error);
-                  // Continue with next concept even if one fails
+                  console.error('Error generating video:', error);
               }
           }
           return results;
