@@ -22,6 +22,7 @@
               <div id="status" class="text-xs text-gray-500 font-mono">System: Idle</div>
           </div>
       </nav>
+
       <header class="max-w-4xl mx-auto px-6 py-16 text-center">
           <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight">Viral <span
   class="gradient-text">"What If"</span> Video Generator</h2>
@@ -30,23 +31,34 @@
               Generate New Viral Batch
           </button>
       </header>
+
       <section class="max-w-7xl mx-auto px-6 pb-20">
           <div id="videoGallery" class="grid md:grid-cols-3 gap-8"></div>
       </section>
+
       <script>
+          // Replace with YOUR OpenHiggsfield API key
+          const API_KEY = "6c56b517-a22c-4577-8c7e-1d6307880d21:2ac399d739198eaab04b373995ec7a2b0954c0d2f2491bb4c4ca04cf3ebb19c2";
+
           const gen = new VideoConceptGenerator();
-          const api = new OpenHiggsfieldVideoGenerator();
+          const api = new OpenHiggsfieldVideoGenerator(API_KEY);
+
           document.getElementById('generateBtn').addEventListener('click', async () => {
               const status = document.getElementById('status');
               const gallery = document.getElementById('videoGallery');
+
               status.innerText = 'System: Generating Concepts...';
               const concepts = gen.generateConcepts();
+
               status.innerText = 'System: Sending to OpenHiggsfield...';
               gallery.innerHTML = '<div class="col-span-3 text-center text-gray-500 italic">Generating
-  videos...</div>';
+  videos... This may take a few seconds...</div>';
+
               const results = await api.generateBatch(concepts);
+
               status.innerText = 'System: Ready';
               gallery.innerHTML = '';
+
               results.forEach(res => {
                   const card = document.createElement('div');
                   card.className = 'bg-gray-900 border border-gray-800 rounded-2xl p-6
@@ -54,11 +66,16 @@
                   card.innerHTML = `
                       <div class="aspect-[9/16] bg-black rounded-xl mb-4 overflow-hidden relative border
   border-gray-700">
-                          <img src="${res.thumbnailUrl}" class="w-full h-full object-cover opacity-80" />
-                          <div class="absolute inset-0 flex items-center justify-center bg-black/40"><span
-  class="text-white font-bold bg-white/10 px-4 py-2 rounded-full backdrop-blur">View</span></div>
+                          <video class="w-full h-full object-cover" controls muted>
+                              <source src="${res.videoUrl}" type="video/mp4">
+                              Your browser does not support video.
+                          </video>
                       </div>
-                      <h4 class="font-bold text-lg mb-2 truncate">${res.metadata.prompt.split(':')[1]}</h4>
+                      <h4 class="font-bold text-lg mb-2 truncate">${res.metadata.prompt}</h4>
+                      <div class="flex justify-between text-xs text-gray-400">
+                          <span>Model: ${res.metadata.model}</span>
+                          <span>Style: ${res.metadata.style}</span>
+                      </div>
                   `;
                   gallery.appendChild(card);
               });
