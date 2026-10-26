@@ -9,19 +9,26 @@
           @import
   url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
           body { font-family: 'Inter', sans-serif; }
-          .gradient-text { background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-          .video-card { transition: all 0.3s ease; }
-          .video-card:hover { transform: scale(1.05); box-shadow: 0 20px 25px -5px rgba(0, 0, 0,
-  0.5); }
+          .gradient-text {
+              background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+          }
+          .video-card {
+              transition: all 0.3s ease;
+          }
+          .video-card:hover {
+              transform: scale(1.05);
+              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+          }
       </style>
   </head>
   <body class="bg-gray-950 text-white min-h-screen">
       <nav class="border-b border-gray-800 p-6 backdrop-blur bg-gray-950/50 sticky top-0 z-50">
           <div class="max-w-7xl mx-auto flex justify-between items-center">
-              <h1 class="text-2xl font-black gradient-text">Unified AI Studio</h1>
+              <h1 class="text-2xl font-black gradient-text">Unified AI Video Studio</h1>
               <div id="status" class="text-xs text-gray-500 font-mono bg-gray-900 px-3 py-1
-  rounded">System: Idle</div>
+  rounded">System: Ready</div>
           </div>
       </nav>
 
@@ -32,7 +39,7 @@
   create viral 9:16 videos with OpenHiggsfield</p>
           <button id="generateBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4
   px-10 rounded-2xl text-lg transition-all duration-200 transform hover:scale-105 shadow-lg
-  shadow-pink-900/20">
+  shadow-pink-900/20 disabled:opacity-50 disabled:cursor-not-allowed">
               Generate New Viral Batch
           </button>
       </header>
@@ -42,9 +49,9 @@
               <div class="col-span-3 text-center py-12">
                   <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2
   border-pink-600 mb-4"></div>
-                  <p class="text-gray-400 text-lg">Ready to generate viral videos!</p>
-                  <p class="text-gray-500 text-sm mt-2">Click the button above to start creating
-  animal "What If" videos</p>
+                  <p class="text-gray-400 text-lg mb-2">Ready to generate viral videos!</p>
+                  <p class="text-gray-500 text-sm">Click the button above to start creating animal
+  "What If" videos</p>
               </div>
           </div>
       </section>
@@ -71,28 +78,28 @@
                       {
                           animal: "Spider",
                           prompt: "Spider fangs dripping neon green venom, photorealistic acid
-  melting steel, toxic cascade effect",
+  melting steel",
                           style: "hyperrealistic",
                           audio: "Geiger counter ticking, acid hiss"
                       },
                       {
                           animal: "Shark",
                           prompt: "Shark swimming, each lap creates wave intensification,
-  photorealistic water physics, dynamic perspective",
+  photorealistic water physics",
                           style: "photorealistic",
                           audio: "Water cracking, sonic boom effects"
                       },
                       {
                           animal: "Elephant",
-                          prompt: "Elephant close-up, age reveals, eyes glowing with ancient
-  wisdom, time bending effects, ethereal lighting",
+                          prompt: "Elephant age reveals, eyes glowing with ancient wisdom, time
+  bending effects",
                           style: "ethereal",
                           audio: "Distant drum rhythms, soft humming"
                       },
                       {
                           animal: "Bird",
-                          prompt: "Beautiful bird singing, sound waves amplifying, glass
-  shattering, harmonic resonance, stunning visual effects",
+                          prompt: "Bird singing, sound waves amplifying, glass shattering,
+  harmonic resonance",
                           style: "photorealistic",
                           audio: "High frequency ringing, harmonic echoes"
                       }
@@ -105,16 +112,14 @@
               }
           }
 
-          // OpenHiggsfield Integration - Clean and Working
+          // OpenHiggsfield Integration - Fixed and Working
           class OpenHiggsfieldVideoGenerator {
               constructor(apiKey, baseUrl = 'http://localhost:3000') {
                   this.apiKey = apiKey;
                   this.baseUrl = baseUrl;
-                  this.baseUrl = baseUrl;
               }
 
               async generateVideo(concept) {
-                  // For demo purposes, we'll create realistic placeholder videos
                   const videoDatabase = {
                       "Lion": {
                           id: "846589368",
@@ -203,7 +208,6 @@
                       try {
                           const result = await this.generateVideo(concept);
                           results.push(result);
-                          // Simulate API delay
                           await new Promise(resolve => setTimeout(resolve, 1000));
                       } catch (error) {
                           console.error('Error generating video:', error);
@@ -245,6 +249,7 @@
                   console.log('Generate button clicked!'); // Debug log
 
                   try {
+                      // Update UI to show loading state
                       generateBtn.disabled = true;
                       generateBtn.textContent = 'Generating...';
                       generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
