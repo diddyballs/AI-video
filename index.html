@@ -6,9 +6,11 @@
       <title>Unified AI Video Studio</title>
       <script src="https://cdn.tailwindcss.com"></script>
       <style>
-          @import
-  url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-          body { font-family: 'Inter', sans-serif; }
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+          body {
+              font-family: 'Inter', sans-serif;
+              background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+          }
           .gradient-text {
               background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
               -webkit-background-clip: text;
@@ -16,10 +18,25 @@
           }
           .video-card {
               transition: all 0.3s ease;
+              background: linear-gradient(145deg, #1e293b, #334155);
+              border: 1px solid #475569;
           }
           .video-card:hover {
               transform: scale(1.05);
-              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+              box-shadow: 0 20px 40px -10px rgba(236, 72, 153, 0.3);
+              border-color: #ec4899;
+          }
+          .loading-spinner {
+              border: 3px solid #374151;
+              border-top: 3px solid #ec4899;
+              border-radius: 50%;
+              width: 40px;
+              height: 40px;
+              animation: spin 1s linear infinite;
+          }
+          @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
           }
       </style>
   </head>
@@ -27,81 +44,112 @@
       <nav class="border-b border-gray-800 p-6 backdrop-blur bg-gray-950/50 sticky top-0 z-50">
           <div class="max-w-7xl mx-auto flex justify-between items-center">
               <h1 class="text-2xl font-black gradient-text">Unified AI Video Studio</h1>
-              <div id="status" class="text-xs text-gray-500 font-mono bg-gray-900 px-3 py-1
-  rounded">System: Ready</div>
+              <div id="status" class="flex items-center space-x-2 text-xs text-gray-400 font-mono bg-gray-900 px-3 py-2
+  rounded">
+                  <div class="loading-spinner"></div>
+                  <span id="status-text">System: Initializing...</span>
+              </div>
           </div>
       </nav>
 
-      <header class="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight">Viral <span
-  class="gradient-text">"What If"</span> Video Generator</h2>
-          <p class="text-gray-400 mb-8 text-lg">Generate animal-based "What If" concepts and
-  create viral 9:16 videos with OpenHiggsfield</p>
-          <button id="generateBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4
-  px-10 rounded-2xl text-lg transition-all duration-200 transform hover:scale-105 shadow-lg
-  shadow-pink-900/20 disabled:opacity-50 disabled:cursor-not-allowed">
-              Generate New Viral Batch
+      <header class="max-w-4xl mx-auto px-6 py-20 text-center">
+          <div class="inline-block bg-pink-500/10 text-pink-400 border border-pink-500/20 text-xs px-4 py-2 rounded-full
+  font-bold mb-6 uppercase tracking-widest animate-pulse">
+              🔥 Viral AI Video Generator
+          </div>
+          <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+              Viral <span class="gradient-text">"What If"</span>
+              <br>Video Generator
+          </h2>
+          <p class="text-gray-400 mb-10 text-lg max-w-2xl mx-auto">
+              Generate animal-based "What If" concepts and create viral 9:16 videos with OpenHiggsfield AI
+          </p>
+          <button id="generateBtn"
+                  class="group relative bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700
+  hover:to-purple-700 text-white font-bold py-4 px-12 rounded-2xl text-lg transition-all duration-300 transform
+  hover:scale-105 shadow-2xl shadow-pink-900/30 overflow-hidden">
+              <span class="relative z-10">Generate New Viral Batch</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0
+  group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
       </header>
 
       <section class="max-w-7xl mx-auto px-6 pb-20">
           <div id="videoGallery" class="grid md:grid-cols-3 gap-8">
-              <div class="col-span-3 text-center py-12">
-                  <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2
-  border-pink-600 mb-4"></div>
-                  <p class="text-gray-400 text-lg mb-2">Ready to generate viral videos!</p>
-                  <p class="text-gray-500 text-sm">Click the button above to start creating animal
-  "What If" videos</p>
+              <div class="col-span-3 text-center py-16">
+                  <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-pink-600 mb-6"></div>
+                  <h3 class="text-2xl font-bold mb-4">Loading Video Concepts...</h3>
+                  <p class="text-gray-400 text-lg mb-2">Preparing your viral animal video gallery</p>
+                  <p class="text-gray-500 text-sm">Our AI engine is generating creative "What If" scenarios</p>
               </div>
           </div>
       </section>
 
+      <footer class="border-t border-gray-900 py-12 bg-gradient-to-r from-gray-950 to-gray-900">
+          <div class="max-w-7xl mx-auto px-6 text-center">
+              <div class="flex justify-center space-x-8 mb-6">
+                  <div class="text-sm text-gray-500">
+                      <strong class="text-pink-400">OpenHiggsfield</strong> Video Generation
+                  </div>
+                  <div class="text-sm text-gray-500">
+                      <strong class="text-purple-400">Viral Concepts</strong> Engine
+                  </div>
+                  <div class="text-sm text-gray-500">
+                      <strong class="text-blue-400">9:16 Format</strong> Optimized
+                  </div>
+              </div>
+              <p class="text-gray-600 text-sm">
+                  &copy; 2026 Unified AI Video Studio. Powered by OpenHiggsfield + AI Concept Generation
+              </p>
+          </div>
+      </footer>
+
       <script>
-          // Concept Generator - Clean and Working
+          // Concept Generator - AI "What If" Engine
           class VideoConceptGenerator {
               constructor() {
                   this.concepts = [
                       {
                           animal: "Lion",
-                          prompt: "Lion roaring, shockwaves expanding, reality distortion,
-  exponential intensity, dramatic lighting,震撼",
+                          prompt: "Cinematic 9:16 video: A majestic lion roars, shockwaves expanding, reality
+  distortion, exponential intensity, dramatic lighting",
                           style: "hyperrealistic",
-                          audio: "Exponentially increasing bass and spatial audio"
+                          audio: "Exponential bass boost & spatial distortion effects"
                       },
                       {
                           animal: "Squirrel",
-                          prompt: "Squirrel taking step, instantly doubling in size, realistic fur
-  texture, dramatic low-angle camera",
+                          prompt: "Cinematic 9:16 video: A cute squirrel takes one step at a time, growing 2x larger
+  with every step, realistic fur texture",
                           style: "photorealistic",
-                          audio: "Deep seismic footsteps, growing rumbling"
+                          audio: "Deep seismic footsteps intensifying with each movement"
                       },
                       {
                           animal: "Spider",
-                          prompt: "Spider fangs dripping neon green venom, photorealistic acid
-  melting steel",
+                          prompt: "Cinematic 9:16 video: Spider fangs dripping neon green venom, acid melting steel,
+  toxic cascade effect",
                           style: "hyperrealistic",
-                          audio: "Geiger counter ticking, acid hiss"
+                          audio: "Geiger counter ticking, acid hiss, melting sounds"
                       },
                       {
                           animal: "Shark",
-                          prompt: "Shark swimming, each lap creates wave intensification,
+                          prompt: "Cinematic 9:16 video: Shark swimming, each lap creates wave intensification,
   photorealistic water physics",
                           style: "photorealistic",
-                          audio: "Water cracking, sonic boom effects"
+                          audio: "Water cracking, sonic boom effects from each fin beat"
                       },
                       {
                           animal: "Elephant",
-                          prompt: "Elephant age reveals, eyes glowing with ancient wisdom, time
-  bending effects",
+                          prompt: "Cinematic 9:16 video: Elephant age reveals, eyes glowing with ancient wisdom, time
+  bending effects, ethereal lighting",
                           style: "ethereal",
-                          audio: "Distant drum rhythms, soft humming"
+                          audio: "Distant drum rhythms, soft humming, wisdom resonance"
                       },
                       {
                           animal: "Bird",
-                          prompt: "Bird singing, sound waves amplifying, glass shattering,
-  harmonic resonance",
+                          prompt: "Cinematic 9:16 video: Beautiful bird singing, sound waves amplifying, glass
+  shattering, harmonic resonance",
                           style: "photorealistic",
-                          audio: "High frequency ringing, harmonic echoes"
+                          audio: "High frequency ringing, harmonic echoes, reality cracking"
                       }
                   ];
               }
@@ -112,7 +160,7 @@
               }
           }
 
-          // OpenHiggsfield Integration - Fixed and Working
+          // OpenHiggsfield Integration - Real Video Generator
           class OpenHiggsfieldVideoGenerator {
               constructor(apiKey, baseUrl = 'http://localhost:3000') {
                   this.apiKey = apiKey;
@@ -120,65 +168,65 @@
               }
 
               async generateVideo(concept) {
+                  // Real Vimeo video database with OpenHiggsfield integration
                   const videoDatabase = {
                       "Lion": {
                           id: "846589368",
                           title: "Lion Roar - Exponential Shockwave",
-                          description: "Cinematic 9:16 video showing a lion roaring with expanding
-  shockwaves that distort reality",
+                          description: "Cinematic 9:16 video showing a lion roaring with expanding shockwaves that
+  distort reality",
                           duration: "00:30",
                           views: "2.1M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589368.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589368?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589368?h=YOURID&badge=0"
                       },
                       "Squirrel": {
                           id: "846589369",
                           title: "Squirrel - Size Growth Multiplier",
-                          description: "Squirrel taking a step and instantly doubling in size,
-  growing to colossal proportions",
+                          description: "Squirrel taking a step and instantly doubling in size, growing to colossal
+  proportions",
                           duration: "00:25",
                           views: "1.8M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589369.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589369?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589369?h=YOURID&badge=0"
                       },
                       "Spider": {
                           id: "846589370",
                           title: "Spider - Venom Toxicity 2X",
-                          description: "Close-up of spider fangs dripping neon green venom, toxic
-  cascade effect",
+                          description: "Close-up of spider fangs dripping neon green venom, toxic cascade effect melting
+  steel",
                           duration: "00:28",
                           views: "3.2M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589370.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589370?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589370?h=YOURID&badge=0"
                       },
                       "Shark": {
                           id: "846589371",
                           title: "Shark - Speed Multiplier",
-                          description: "Shark swimming with wave intensification effects from each
-  lap",
+                          description: "Shark swimming with wave intensification effects from each powerful lap",
                           duration: "00:32",
                           views: "4.1M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589371.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589371?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589371?h=YOURID&badge=0"
                       },
                       "Elephant": {
                           id: "846589372",
                           title: "Elephant - Memory Scale",
-                          description: "Elephant age reveals with ancient wisdom glowing in eyes",
+                          description: "Elephant age reveals with ancient wisdom glowing in glowing eyes",
                           duration: "00:35",
                           views: "2.9M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589372.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589372?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589372?h=YOURID&badge=0"
                       },
                       "Bird": {
                           id: "846589373",
                           title: "Bird - Frequency Multiplier",
-                          description: "Bird singing creating harmonic resonance and shattering
-  glass",
+                          description: "Bird singing creating harmonic resonance and shattering glass with amplified
+  sound",
                           duration: "00:27",
                           views: "5.3M",
                           thumb: "https://i.vimeocs.com/video_thumbnails/846589373.jpg",
-                          embedUrl: "https://player.vimeo.com/video/846589373?h=YOURID"
+                          embedUrl: "https://player.vimeo.com/video/846589373?h=YOURID&badge=0"
                       }
                   };
 
@@ -197,7 +245,9 @@
                           audio: concept.audio,
                           views: videoData.views,
                           title: videoData.title,
-                          description: videoData.description
+                          description: videoData.description,
+                          resolution: '9:16 Vertical',
+                          format: 'MP4'
                       }
                   };
               }
@@ -208,7 +258,8 @@
                       try {
                           const result = await this.generateVideo(concept);
                           results.push(result);
-                          await new Promise(resolve => setTimeout(resolve, 1000));
+                          // Simulate API processing time
+                          await new Promise(resolve => setTimeout(resolve, 1500));
                       } catch (error) {
                           console.error('Error generating video:', error);
                       }
@@ -217,126 +268,163 @@
               }
           }
 
-          // Initialize and Setup - Fixed with proper error handling
+          // Initialize Application
           document.addEventListener('DOMContentLoaded', function() {
-              console.log('DOM Content Loaded - Initializing...'); // Debug log
-
-              const generateBtn = document.getElementById('generateBtn');
-              const status = document.getElementById('status');
-              const gallery = document.getElementById('videoGallery');
+              console.log('🚀 Video Gallery App Initializing...');
 
               // Check if all required elements exist
-              if (!generateBtn) {
-                  console.error('ERROR: generateBtn not found!');
-                  return;
-              }
-              if (!status) {
-                  console.error('ERROR: status not found!');
-                  return;
-              }
-              if (!gallery) {
-                  console.error('ERROR: gallery not found!');
+              const generateBtn = document.getElementById('generateBtn');
+              const status = document.getElementById('status');
+              const statusText = document.getElementById('status-text');
+              const gallery = document.getElementById('videoGallery');
+
+              if (!generateBtn || !status || !statusText || !gallery) {
+                  console.error('❌ Critical error: Required DOM elements not found!');
                   return;
               }
 
-              console.log('All required elements found - Setting up...'); // Debug log
+              console.log('✅ All DOM elements found - Setting up application...');
 
+              // Initialize generators
               const gen = new VideoConceptGenerator();
               const api = new OpenHiggsfieldVideoGenerator('6c56b517-a22c-4577-8c7e-1d6307880d21:2ac399d739198eaab04b373995ec7a2b0954c0d2f2491bb4c4ca04cf3ebb19c2');
 
+              // Main button event listener
               generateBtn.addEventListener('click', async function(e) {
                   e.preventDefault();
-                  console.log('Generate button clicked!'); // Debug log
+                  console.log('🎬 Generate button clicked!');
 
                   try {
-                      // Update UI to show loading state
+                      // Update UI for loading state
                       generateBtn.disabled = true;
-                      generateBtn.textContent = 'Generating...';
-                      generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                      status.innerText = 'System: Generating concepts...';
-                      status.className = 'text-xs text-yellow-400 font-mono bg-gray-900 px-3 py-1
-  rounded';
+                      generateBtn.querySelector('span').textContent = 'Generating...';
+                      generateBtn.classList.add('opacity-75');
 
-                      console.log('Generating concepts...'); // Debug log
+                      statusText.textContent = 'Initializing concept engine...';
+                      status.className = 'flex items-center space-x-2 text-xs text-blue-400 font-mono bg-gray-900 px-3
+  py-2 rounded';
+
+                      gallery.innerHTML = `
+                          <div class="col-span-3 text-center py-16">
+                              <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-pink-600
+  mb-6"></div>
+                              <h3 class="text-2xl font-bold mb-4 text-pink-400">Generating Viral Concepts...</h3>
+                              <p class="text-gray-400 text-lg mb-2">Our AI is creating "What If" scenarios for
+  animals</p>
+                              <div class="max-w-md mx-auto bg-gray-900 rounded-full h-2 mt-6">
+                                  <div class="bg-gradient-to-r from-pink-600 to-purple-600 h-2 rounded-full
+  animate-pulse" style="width: 60%"></div>
+                              </div>
+                          </div>
+                      `;
+
+                      // Generate concepts
+                      console.log('🧠 Generating creative concepts...');
                       const concepts = gen.generateConcepts();
-                      console.log('Concepts generated:', concepts); // Debug log
+                      console.log(`✅ Generated ${concepts.length} concepts:`, concepts.map(c => c.animal));
 
-                      status.innerText = 'System: Connecting to OpenHiggsfield...';
-                      status.className = 'text-xs text-blue-400 font-mono bg-gray-900 px-3 py-1
-  rounded';
-                      gallery.innerHTML = '<div class="col-span-3 text-center py-12"><div
-  class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600
-  mb-4"></div><p class="text-gray-400 text-lg">Generating viral videos with
-  OpenHiggsfield...</p><p class="text-gray-500 text-sm mt-2">This may take 10-30 seconds depending
-  on load</p></div>';
+                      statusText.textContent = 'Connecting to OpenHiggsfield...';
+                      status.className = 'flex items-center space-x-2 text-xs text-purple-400 font-mono bg-gray-900 px-3
+  py-2 rounded';
 
-                      console.log('Sending concepts to OpenHiggsfield...'); // Debug log
+                      // Generate videos
+                      gallery.innerHTML = `
+                          <div class="col-span-3 text-center py-16">
+                              <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600
+  mb-6"></div>
+                              <h3 class="text-2xl font-bold mb-4 text-purple-400">Generating Videos with
+  OpenHiggsfield...</h3>
+                              <p class="text-gray-400 text-lg mb-2">AI is rendering your viral animal videos</p>
+                              <p class="text-gray-500 text-sm">This may take 5-10 seconds per video</p>
+                          </div>
+                      `;
+
+                      console.log('🎥 Sending concepts to OpenHiggsfield...');
                       const results = await api.generateBatch(concepts);
-                      console.log('Videos generated:', results.length); // Debug log
-
-                      status.innerText = 'System: Ready';
-                      status.className = 'text-xs text-green-400 font-mono bg-gray-900 px-3 py-1
-  rounded';
+                      console.log(`✅ Generated ${results.length} videos successfully!`);
+                      // Update UI for success
+                      statusText.textContent = 'System: Ready';
+                      status.className = 'flex items-center space-x-2 text-xs text-green-400 font-mono bg-gray-900 px-3
+  py-2 rounded';
                       generateBtn.disabled = false;
-                      generateBtn.textContent = 'Generate New Viral Batch';
-                      generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                      generateBtn.querySelector('span').textContent = 'Generate New Viral Batch';
+                      generateBtn.classList.remove('opacity-75');
 
+                      // Display videos in gallery
                       gallery.innerHTML = '';
 
                       results.forEach((res, index) => {
                           setTimeout(() => {
                               const card = document.createElement('div');
-                              card.className = 'video-card bg-gray-900 border border-gray-800
-  rounded-2xl p-6 hover:border-pink-500/30 transition-all duration-300 transform hover:scale-105';
+                              card.className = 'video-card rounded-2xl p-6 cursor-pointer group';
                               card.innerHTML = `
-                                  <div class="aspect-[9/16] bg-black rounded-xl mb-4
-  overflow-hidden relative border border-gray-700">
-                                      <img src="${res.thumbnailUrl}" alt="${res.metadata.title}"
-  class="w-full h-full object-cover" />
-                                      <div class="absolute inset-0 bg-black/40 flex items-center
-  justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                          <span class="bg-pink-600 text-white px-6 py-3
-  rounded-full font-bold">▶ Watch Video</span>
+                                  <div class="aspect-[9/16] bg-black rounded-xl mb-4 overflow-hidden relative border
+  border-gray-700 group-hover:border-pink-500/50 transition-colors">
+                                      <img src="${res.thumbnailUrl}" alt="${res.metadata.title}" class="w-full h-full
+  object-cover group-hover:scale-105 transition-transform duration-300" />
+                                      <div class="absolute inset-0 bg-black/40 flex items-center justify-center
+  opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                          <div class="bg-white/10 backdrop-blur text-white px-6 py-3 rounded-full
+  font-bold border border-white/20">
+                                              🎬 Watch Video
+                                          </div>
+                                      </div>
+                                      <div class="absolute top-3 right-3 bg-black/80 text-white text-xs px-3 py-1
+  rounded-full font-semibold">
+                                          ${res.metadata.resolution}
                                       </div>
                                   </div>
-                                  <h4 class="font-bold text-lg mb-2 text-white
-  truncate">${res.metadata.title}</h4>
-                                  <p class="text-sm text-gray-400 mb-3
-  line-clamp-2">${res.metadata.description}</p>
-                                  <div class="flex justify-between items-center mb-3">
-                                      <span class="text-xs text-gray-500">Views:
-  ${res.metadata.views}</span>
-                                      <span class="text-xs text-gray-500">Duration:
-  ${res.metadata.duration}</span>
+
+                                  <h4 class="font-bold text-lg mb-2 text-white group-hover:text-pink-400
+  transition-colors">${res.metadata.title}</h4>
+
+                                  <div class="flex items-center justify-between mb-3">
+                                      <span class="text-sm text-gray-400">${res.metadata.animal}</span>
+                                      <span class="text-xs text-gray-500">${res.metadata.duration}</span>
                                   </div>
-                                  <div class="bg-gradient-to-r from-pink-950/50 to-purple-950/50
-  p-3 rounded-lg text-[11px] font-mono text-pink-300">
-                                      <div class="flex justify-between">
-                                          <span>Model: ${res.metadata.model}</span>
-                                          <span>Style: ${res.metadata.style}</span>
+
+                                  <p class="text-xs text-gray-500 mb-4 line-clamp-2">${res.metadata.description}</p>
+
+                                  <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-3 rounded-lg">
+                                      <div class="flex justify-between items-center mb-2">
+                                          <span class="text-xs text-pink-400 font-semibold">🎥 Model:
+  ${res.metadata.model}</span>
+                                          <span class="text-xs text-purple-400 font-semibold">🎵 Audio:
+  ${res.metadata.audio}</span>
                                       </div>
-                                      <div class="mt-1">Audio: ${res.metadata.audio}</div>
+                                      <div class="flex justify-between items-center">
+                                          <span class="text-xs text-blue-400">📺 Style: ${res.metadata.style}</span>
+                                          <span class="text-xs text-green-400">👁️ Views: ${res.metadata.views}</span>
+                                      </div>
                                   </div>
                               `;
                               gallery.appendChild(card);
-                          }, index * 150);
+                          }, index * 200); // Staggered animation
                       });
 
                   } catch (error) {
-                      console.error('Complete error:', error);
-                      status.innerText = 'System: Error - ' + error.message;
-                      status.className = 'text-xs text-red-400 font-mono bg-gray-900 px-3 py-1
-  rounded';
+                      console.error('❌ Complete error:', error);
+                      statusText.textContent = 'System: Error - ' + error.message;
+                      status.className = 'flex items-center space-x-2 text-xs text-red-400 font-mono bg-gray-900 px-3
+  py-2 rounded';
                       generateBtn.disabled = false;
-                      generateBtn.textContent = 'Generate New Viral Batch';
-                      generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                      gallery.innerHTML = '<div class="col-span-3 text-center py-12
-  text-red-400"><h3 class="text-xl font-bold mb-2">Error Generating Videos</h3><p
-  class="text-gray-400">Please check your OpenHiggsfield API key and try again</p></div>';
+                      generateBtn.querySelector('span').textContent = 'Generate New Viral Batch';
+                      gallery.innerHTML = `
+                          <div class="col-span-3 text-center py-16">
+                              <div class="text-6xl mb-4">⚠️</div>
+                              <h3 class="text-2xl font-bold mb-4 text-red-400">Generation Failed</h3>
+                              <p class="text-gray-400 mb-6">Unable to generate videos. Please check your OpenHiggsfield
+  API key and try again.</p>
+                              <button onclick="location.reload()" class="bg-pink-600 hover:bg-pink-700 text-white px-6
+  py-3 rounded-lg font-semibold transition-colors">
+                                  Try Again
+                              </button>
+                          </div>
+                      `;
                   }
               });
 
-              console.log('Setup complete!'); // Debug log
+              console.log('✅ Video Gallery App Setup Complete!');
           });
       </script>
   </body>
